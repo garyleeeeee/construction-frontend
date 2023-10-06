@@ -1,0 +1,116 @@
+.grid-modules-container {
+    width: 100%;
+    top: var(--navbar-height);
+    height: calc(100vh - var(--navbar-height));
+    padding: 0px 20px;
+
+    .top-header {
+        top: var(--navbar-height);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0px;
+        // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+        button {
+            padding: 8px 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            color: #345995;
+            border-color: #345994;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease-in-out;
+
+            .module-icon {
+                font-weight: bold;
+            }
+
+            &:hover {
+                background-color: #345995;
+                color: white;
+            }
+        }
+    }
+
+    .scrollable-content {
+        height: calc(100vh - var(--navbar-height) - 85px);
+        overflow-y: scroll;
+        padding: 0px 10px;
+        
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        .module-links {
+            display: grid;
+            grid-template-columns: 1fr; /* By default, 1 column for smaller screens */
+            gap: 2.5rem; /* Spacing between the links */
+            column-gap: 2.5rem;
+            padding-bottom: 20px;
+            justify-content: center;
+            align-items: center;
+
+            .module-link {
+                text-decoration: none;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+        }
+    }
+}
+
+
+/* Media query for screens larger than 992px */
+@media (min-width: 768px) {
+
+    .grid-modules-container {
+        .scrollable-content {
+            padding: 0px 20px;
+            .module-links {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns for larger screens */
+            }
+
+        }
+
+    }
+}
+
+
+
+/* Media query for screens larger than 992px */
+@media (min-width: 992px) {
+
+    .grid-modules-container {
+        .scrollable-content {
+            .module-links {
+                grid-template-columns: repeat(3, 1fr); /* 2 columns for larger screens */
+            }
+
+        }
+
+    }
+}
+
+
+
+
+/* Media query for screens larger than 992px */
+@media (min-width: 1280px) {
+
+    .grid-modules-container {
+        .scrollable-content {
+            .module-links {
+                grid-template-columns: repeat(4, 1fr); /* 2 columns for larger screens */
+            }
+
+        }
+
+    }
+}
+

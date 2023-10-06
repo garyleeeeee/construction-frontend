@@ -1,0 +1,58 @@
+.personnel-management-page-container {
+    position: relative;
+    padding: 20px 20px;
+    top: var(--navbar-height);
+    background-color: #FEFEFE;
+
+    .update-icon {
+        cursor: pointer;
+        color: #007bff;  // Giving it a default blue color
+    
+        &:hover {
+            color: #0056b3;  // Darken the color slightly on hover for feedback
+        }
+    }
+
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto; // This will show horizontal scrollbar when content overflows
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px; // You can adjust this to the minimum width you want for your table
+
+            thead {
+                background-color: #f7f7f7;
+
+                tr {
+                    th {
+                        padding: 10px 15px;
+                        border: 1px solid #e0e0e0;
+                        text-align: left;
+                        font-weight: bold;
+                    }
+                }
+            }
+
+            tbody {
+                tr {
+                    &:nth-child(odd) {
+                        background-color: #f9f9f9;
+                    }
+
+                    td {
+                        padding: 10px 15px;
+                        border: 1px solid #e0e0e0;
+                        text-align: left;
+                        font-size: 14px;
+
+                        &.status-inactive {
+                            color: red;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,10 @@
+.home-page-container {
+    position: relative;
+    top: var(--navbar-height);
+    background-image: url('../../assets/dashboard1.jpg');
+    width: 100%;
+    height: calc(100vh - var(--navbar-height));
+    background-position: center ;  /* This positions the image in the center of the element */
+    background-repeat: no-repeat; /* This ensures the image doesn't repeat */
+    background-size: cover;  
+}

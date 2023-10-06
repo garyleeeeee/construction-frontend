@@ -1,0 +1,36 @@
+.nav-bar {
+    width: 100%;
+    height: var(--navbar-height);
+    background-color: #345995;
+    position: fixed;
+    min-width: 360px;
+    max-width: 1800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+}
+.ham-icon,
+.close-icon {
+    margin-left: 20px;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+
+  &.hidden {
+    opacity: 0;
+    pointer-events: none; // Make the element unclickable when hidden
+  }
+};
+
+
+
+@media only screen and (min-width: 767px) {
+  .ham-icon,
+  .close-icon {
+    width: 35px;
+    height: 35px;
+  }
+}
