@@ -1,7 +1,7 @@
 .grid-modules-container {
     width: 100%;
-    // top: var(--navbar-height);
-    // height: calc(100vh - var(--navbar-height));
+    top: var(--navbar-height);
+    height: calc(100svh - var(--navbar-height));
     padding: 0px 20px;
 
     .top-header {
