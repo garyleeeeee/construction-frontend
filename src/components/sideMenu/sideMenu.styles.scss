@@ -1,11 +1,11 @@
 // sideMenu.styles.scss
 
 .side-menu {
-    z-index: 999;
+    z-index: 998;
     position: absolute;
     width: 100%;
     left: -100%;
-    height: calc(100vh - 64px);
+    height: calc(100svh - var(--navbar-height));
     top: var(--navbar-height);
     overflow: hidden;  // Hide content that goes outside the box
     transition: all 0.5s ease-in-out;

@@ -1,11 +1,11 @@
 .grid-modules-container {
     width: 100%;
-    top: var(--navbar-height);
-    height: calc(100vh - var(--navbar-height));
+    // top: var(--navbar-height);
+    // height: calc(100vh - var(--navbar-height));
     padding: 0px 20px;
 
     .top-header {
-        top: var(--navbar-height);
+        // top: var(--navbar-height);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -47,7 +47,7 @@
 
         .module-links {
             display: grid;
-            grid-template-columns: 1fr; /* By default, 1 column for smaller screens */
+            grid-template-columns: repeat(2, 1fr); /* By default, 1 column for smaller screens */
             gap: 2.5rem; /* Spacing between the links */
             column-gap: 2.5rem;
             padding-bottom: 20px;

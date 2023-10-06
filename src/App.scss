@@ -4,7 +4,7 @@
 }
 
 :root {
-  --navbar-height: 64px;
+  --navbar-height: 48px;
   min-height: inherit;
   position: relative;
   margin: 0px auto;
@@ -21,11 +21,12 @@ html {
   font-size: 16px;
   min-width: 360px;
   max-width: 1800px;
+  background-color: #FFFFFF;
 }
 
 body {
   font-family: 'SFPRO', sans-serif;
   width: 100%;
-  min-height: 100vh;
+  min-height: 100svh;
   background-color: #FFFFFF;
 }
