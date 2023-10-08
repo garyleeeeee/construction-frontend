@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../contexts/user.context';
 import { Navigate } from 'react-router-dom';
 import { httpSignInUser, httpFetchAllUsers } from '../../hooks/requests';
-
+import AddUserPage from '../addUserPage/addUserPage.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWrench } from '@fortawesome/free-solid-svg-icons';
 import Modal from '../modal/modal.component';
@@ -16,6 +16,7 @@ const PersonnelManagementPage = () => {
     const [ allUsers, setAllUsers ] = useState([]);
     const [ errorMessage, setErrorMessage ] = useState('');
     const [ isModalVisible, setIsModalVisible ] = useState(false);
+    const [ isAddingUser, setIsAddingUser ] = useState(false);
 
 
     useEffect( () => {
@@ -47,6 +48,8 @@ const PersonnelManagementPage = () => {
         
      }, [currentUser, setCurrentUser]);
 
+    
+
      const updateUser = async () => {
         console.log('Updating User');
      };
@@ -55,12 +58,19 @@ const PersonnelManagementPage = () => {
         setIsModalVisible(false);
         setErrorMessage(''); // Clear the error message
     };
+
+    const toggleIsAddingUser = () => {
+        setIsAddingUser(prevState => !prevState);
+      };
     
 
     return (
         currentUser ?
         <div className='personnel-management-page-container'>
             <h1>人事管理</h1>
+            <div className='function-buttons'>
+                <button onClick={toggleIsAddingUser}>新增人员</button>
+            </div>
             <div className="table-responsive">
                 <table>
                 <thead>
@@ -91,9 +101,12 @@ const PersonnelManagementPage = () => {
                 </tbody>
                 </table>
             </div>
-            {isModalVisible && 
+            {   isModalVisible && 
             <Modal message={errorMessage} onClose={closeModal} signOut={true} />
-        }
+            }
+            {
+                isAddingUser && <AddUserPage setIsAddingUser={setIsAddingUser}/>
+            }
         </div> :
         <Navigate to='/' />
     );
