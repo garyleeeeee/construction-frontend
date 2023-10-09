@@ -2,10 +2,12 @@ import './addUserPage.styles.scss';
 import { useState } from 'react';
 import { ReactComponent as CloseIcon } from '../../icons/close.svg';
 import { httpAddPendingUser } from '../../hooks/requests';
+import { ReactComponent as Loading } from '../../icons/loading.svg';
 
 
 const AddUserPage = ({setIsAddingUser, onUserAdded}) => {
 
+    const [ isLoading, setIsLoading ] = useState(false);
     const [ errorMessage, setErrorMessage ] = useState('');
     const [formData, setFormData] = useState({
         name: '',
@@ -15,34 +17,47 @@ const AddUserPage = ({setIsAddingUser, onUserAdded}) => {
         salary: 0
       });
 
-      const handleChange = (e) => {
+    function containsOnlyNumbers(input) {
+        return /^[0-9]+$/.test(input);
+    }
+
+    const handleChange = (e) => {
         const { name, value } = e.target;
 
         // Convert value for specific fields
         const finalValue = (name === 'accessLevel' || name === 'salary') ? +value : value;
-    
         setFormData(prevData => ({ ...prevData, [name]: finalValue }));
-      };
+    };
 
-      const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
+        setIsLoading(true);
         e.preventDefault();
         setErrorMessage('');
+
+        // Validate the phoneNumber input
+        if (!containsOnlyNumbers(formData.phoneNumber)) {
+            setIsLoading(false);
+            setErrorMessage('电话号码有误！');
+            return;  // Exit early if validation fails
+        }
 
         const response = await httpAddPendingUser(formData);
 
         if (response.success) {
+            setIsLoading(false);
             // Call the callback function to notify the parent component
             if (onUserAdded) {
                 onUserAdded(response.data); // Pass the newly added user data to the parent
             };
             // Close the window
             setIsAddingUser(false);
-          } else {
+        } else {
+            setIsLoading(false);
             // Notification on top about Error
             console.log(response.message);
             setErrorMessage(response.message);
-          }
-      }
+        }
+    }
 
     return (
         <div className='add-user-page-overlay'>
@@ -128,6 +143,9 @@ const AddUserPage = ({setIsAddingUser, onUserAdded}) => {
                     {errorMessage && <h4 className='errorMessage'>{errorMessage}</h4>}
                     <button type="submit">完成</button>
                 </form>
+                {
+                isLoading && <Loading className='loadingIcon' />
+                }
             </div>
         </div>
     );

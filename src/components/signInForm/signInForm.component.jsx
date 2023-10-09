@@ -2,9 +2,12 @@ import React, { useState, useContext } from 'react';
 import { UserContext } from '../../contexts/user.context';
 import './signInForm.styles.scss';
 import { httpSignInUser } from '../../hooks/requests';
+import { ReactComponent as Loading } from '../../icons/loading.svg';
 
 const SignInForm = () => {
   const [ errorMessage, setErrorMessage ] = useState('');
+  const [ isLoading, setIsLoading ] = useState(false);
+
   const [formData, setFormData] = useState({
     name: '',
     password: ''
@@ -21,11 +24,13 @@ const SignInForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     setErrorMessage('');
     const response = await httpSignInUser(formData);
 
     if (response.success) {
+      setIsLoading(false);
       const user = response.data;
       const accessToken = response.accessToken;
 
@@ -35,6 +40,7 @@ const SignInForm = () => {
 
       setCurrentUser(user);
     } else {
+      setIsLoading(false);
       setErrorMessage(response.message)
     }
   };
@@ -66,6 +72,7 @@ const SignInForm = () => {
           />
         </div>
         {errorMessage && <h4 className='errorMessage'>{errorMessage}</h4>}
+        { isLoading && <Loading className='loadingIcon' /> }
         <button type="submit">登录</button>
       </form>
     </div>

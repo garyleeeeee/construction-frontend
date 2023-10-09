@@ -6,21 +6,25 @@ import { httpFetchAllUsers } from '../../hooks/requests';
 import AddUserPage from '../addUserPage/addUserPage.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWrench, faLink } from '@fortawesome/free-solid-svg-icons';
+import { ReactComponent as Loading } from '../../icons/loading.svg';
 import Modal from '../modal/modal.component';
 
 
 const PersonnelManagementPage = () => {
-    
+
+    const [copiedUserId, setCopiedUserId] = useState("");
     const { currentUser } = useContext(UserContext);
     const [ allUsers, setAllUsers ] = useState([]);
     const [ errorMessage, setErrorMessage ] = useState('');
     const [ isModalVisible, setIsModalVisible ] = useState(false);
     const [ isAddingUser, setIsAddingUser ] = useState(false);
+    const [ isLoading, setIsLoading ] = useState(false);
 
     useEffect(() => {
         let isMounted = true;
 
         async function getAllUsers () {
+            setIsLoading(true);
             const response = await httpFetchAllUsers();
 
             if (!isMounted) return;
@@ -28,15 +32,18 @@ const PersonnelManagementPage = () => {
             //Token Expired
             if (response.message === 'Invalid Token') {
                 // Handle token expiration
+                setIsLoading(false);
                 setErrorMessage('登录信息过期，请重新登录！');
                 setIsModalVisible(true);
             } else 
             if (!response.success) {
+                setIsLoading(false);
                 setErrorMessage(response.message); 
             } else {
+                setIsLoading(false);
                 setAllUsers(response.data);
-            }
-        }
+            };
+        };
         getAllUsers();
         return () => {
             isMounted = false;  // Set to false when component unmounts
@@ -65,11 +72,16 @@ const PersonnelManagementPage = () => {
 
     const handleLink = async (id) => {
         const domain = `${window.location.origin}/initial-password/${id}`;
-        console.log(domain);
 
         try {
+            // TODO
             await navigator.clipboard.writeText(domain);
-            alert('Link copied successfully!');
+            setCopiedUserId(id);// Mark this user's link as copied
+
+            // Hide the "copied" message after 2 seconds
+            setTimeout(() => {
+                setCopiedUserId("");
+            }, 1500);
         } catch (err) {
             alert('Failed to copy the link.');
         }
@@ -111,6 +123,8 @@ const PersonnelManagementPage = () => {
                                     <div className='status-container'>
                                         <span>{user.status}</span>
                                         <FontAwesomeIcon icon={faLink} onClick={() => {handleLink(user._id)}} className='link-icon' />
+                                        {copiedUserId === user._id && 
+                                        <div className="copied-msg">已复制</div>}
                                     </div>
                                     :
                                     user.status
@@ -122,6 +136,9 @@ const PersonnelManagementPage = () => {
                 </tbody>
                 </table>
             </div>
+            {
+                isLoading && <Loading className='loadingIcon' />
+            }
             {   isModalVisible && 
             <Modal message={errorMessage} onClose={closeModal} signOut={true} />
             }
