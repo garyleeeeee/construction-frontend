@@ -2,7 +2,7 @@
     position: relative;
     padding: 20px 20px;
     top: var(--navbar-height);
-    height: calc(100vh - var(--navbar-height));
+    height: calc(100svh - var(--navbar-height));
     background-color: #FEFEFE;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 
