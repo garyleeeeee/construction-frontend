@@ -9,6 +9,12 @@
     h1 {
         margin-bottom: 20px;
         font-size: 1.6em;
+    };
+
+    .status-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .function-buttons {
@@ -31,7 +37,8 @@
         }
     }
 
-    .update-icon {
+
+    .link-icon, .update-icon {
         cursor: pointer;
         color: #345995;
 

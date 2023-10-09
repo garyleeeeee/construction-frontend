@@ -1,9 +1,12 @@
 import './addUserPage.styles.scss';
 import { useState } from 'react';
 import { ReactComponent as CloseIcon } from '../../icons/close.svg';
+import { httpAddPendingUser } from '../../hooks/requests';
 
-const AddUserPage = ({setIsAddingUser}) => {
 
+const AddUserPage = ({setIsAddingUser, onUserAdded}) => {
+
+    const [ errorMessage, setErrorMessage ] = useState('');
     const [formData, setFormData] = useState({
         name: '',
         accessLevel: 0,
@@ -21,12 +24,32 @@ const AddUserPage = ({setIsAddingUser}) => {
         setFormData(prevData => ({ ...prevData, [name]: finalValue }));
       };
 
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        setErrorMessage('');
+
+        const response = await httpAddPendingUser(formData);
+
+        if (response.success) {
+            // Call the callback function to notify the parent component
+            if (onUserAdded) {
+                onUserAdded(response.data); // Pass the newly added user data to the parent
+            };
+            // Close the window
+            setIsAddingUser(false);
+          } else {
+            // Notification on top about Error
+            console.log(response.message);
+            setErrorMessage(response.message);
+          }
+      }
+
     return (
         <div className='add-user-page-overlay'>
             <div className='add-user-page-content'>
             <CloseIcon className="close-button" onClick={() => setIsAddingUser(false)}/>
                 <h2>新增人员信息</h2>
-                <form onSubmit={()=> {}}>
+                <form onSubmit={handleSubmit}>
                     <div className="input-group">
                         <label htmlFor="name">姓名</label>
                         <input 
@@ -102,6 +125,7 @@ const AddUserPage = ({setIsAddingUser}) => {
                             required
                         />
                     </div>
+                    {errorMessage && <h4 className='errorMessage'>{errorMessage}</h4>}
                     <button type="submit">完成</button>
                 </form>
             </div>

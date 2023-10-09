@@ -4,6 +4,7 @@ import './signInForm.styles.scss';
 import { httpSignInUser } from '../../hooks/requests';
 
 const SignInForm = () => {
+  const [ errorMessage, setErrorMessage ] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     password: ''
@@ -21,6 +22,7 @@ const SignInForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setErrorMessage('');
     const response = await httpSignInUser(formData);
 
     if (response.success) {
@@ -33,8 +35,7 @@ const SignInForm = () => {
 
       setCurrentUser(user);
     } else {
-      // Notification on top about Error
-      console.log(response.message)
+      setErrorMessage(response.message)
     }
   };
 
@@ -64,6 +65,7 @@ const SignInForm = () => {
             required
           />
         </div>
+        {errorMessage && <h4 className='errorMessage'>{errorMessage}</h4>}
         <button type="submit">登录</button>
       </form>
     </div>

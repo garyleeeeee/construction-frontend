@@ -7,6 +7,7 @@ import { UserContext } from './contexts/user.context';
 import WarehousePage from './components/warehousePage/warehousePage.component';
 import PersonalInfoPage from './components/personalInfoPage/personalInfoPage.component';
 import PersonnelManagementPage from './components/personnelManagementPage/personnelManagementPage.component';
+import InitialPasswordPage from './components/initialPasswordPage/initialPasswordPage.component';
 
 function App() {
   const { setCurrentUser } = useContext(UserContext);
@@ -32,6 +33,7 @@ function App() {
       <Route path='warehouse' element={<WarehousePage />}/>
       <Route path='personal-info' element={<PersonalInfoPage />}/>
       <Route path='personnel-management' element={<PersonnelManagementPage />}/>
+      <Route path='initial-password/:id' element={<InitialPasswordPage />}/>
       </Route>
     </Routes>
   );
