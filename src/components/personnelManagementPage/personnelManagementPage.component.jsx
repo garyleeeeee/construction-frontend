@@ -114,7 +114,7 @@ const PersonnelManagementPage = () => {
                                     </div>
                                     :
                                     user.status
-                            };
+                            }
                             </td>
                             <td><FontAwesomeIcon icon={faWrench} onClick={updateUser} className='update-icon' /></td>
                         </tr>
