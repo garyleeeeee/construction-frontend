@@ -24,6 +24,7 @@
             justify-content: center;
             align-items: center;
             transition: all 0.3s ease-in-out;
+            background-color: whitesmoke;
 
             .module-icon {
                 font-weight: bold;
@@ -39,7 +40,6 @@
     .scrollable-content {
         height: calc(100vh - var(--navbar-height) - 85px);
         overflow-y: scroll;
-        padding: 0px 10px;
         
         &::-webkit-scrollbar {
             display: none;
@@ -48,11 +48,12 @@
         .module-links {
             display: grid;
             grid-template-columns: repeat(2, 1fr); /* By default, 1 column for smaller screens */
-            gap: 2.5rem; /* Spacing between the links */
-            column-gap: 2.5rem;
-            padding-bottom: 20px;
             justify-content: center;
             align-items: center;
+            padding: 10px;
+            background-color: whitesmoke;
+            border-radius: 15px;
+            gap: 10px;
 
             .module-link {
                 text-decoration: none;
@@ -61,56 +62,25 @@
                 align-items: center;
             }
 
+            
         }
     }
 }
 
 
-/* Media query for screens larger than 992px */
-@media (min-width: 768px) {
 
-    .grid-modules-container {
-        .scrollable-content {
-            padding: 0px 20px;
-            .module-links {
-                grid-template-columns: repeat(2, 1fr); /* 2 columns for larger screens */
-            }
-
-        }
-
-    }
-}
-
-
-
-/* Media query for screens larger than 992px */
+/* Media query for screens larger than or equal to 992px */
 @media (min-width: 992px) {
-
-    .grid-modules-container {
-        .scrollable-content {
-            .module-links {
-                grid-template-columns: repeat(3, 1fr); /* 2 columns for larger screens */
-            }
-
-        }
-
+    .grid-modules-container .scrollable-content .module-links {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
 
 
-
-/* Media query for screens larger than 992px */
+/* Media query for screens larger than or equal to 1280px */
 @media (min-width: 1280px) {
-
-    .grid-modules-container {
-        .scrollable-content {
-            .module-links {
-                grid-template-columns: repeat(4, 1fr); /* 2 columns for larger screens */
-            }
-
-        }
-
+    .grid-modules-container .scrollable-content .module-links {
+        grid-template-columns: repeat(4, 1fr);
     }
 }
-

@@ -4,7 +4,7 @@ import { UserContext } from '../../contexts/user.context';
 import { Link } from 'react-router-dom';
 import ModuleCover from '../moduleCover/moduleCover.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import Modal from '../modal/modal.component';
 
 
@@ -28,7 +28,7 @@ const GridModules = ({toggleMenu}) => {
             <div className='top-header'>
                 <h1>{currentUser.name}，欢迎回来！</h1>
                 <button onClick={signOut}>
-                    <FontAwesomeIcon icon={faPowerOff} className='module-icon'/>
+                <FontAwesomeIcon icon={faRightFromBracket} className='module-icon' />
                 </button>
             </div>
             <div className='scrollable-content'>
@@ -42,13 +42,12 @@ const GridModules = ({toggleMenu}) => {
                     <Link to='/personal-info' onClick={toggleMenu} className='module-link' >
                         <ModuleCover moduleName='个人信息'/>
                     </Link>
-                    {/* <Link to='/cars' onClick={toggleMenu} className='module-link' >
+                    <Link to='/cars' onClick={toggleMenu} className='module-link' >
                         <ModuleCover moduleName='车辆管理'/>
-                    </Link> */}
+                    </Link>
                     <Link to='/personnel-management' onClick={toggleMenu} className='module-link' >
                         <ModuleCover moduleName='人事管理'/>
                     </Link>
-
                 </div>
             </div>
             {isModalVisible && 
