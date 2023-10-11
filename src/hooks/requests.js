@@ -87,6 +87,33 @@ export const httpFindUserById = async (userData) => {
     }
 };
 
+// Update User Info
+export const httpUpdateUser = async (userData) => {
+    try {
+        const response = await fetch(`${API_URL}/users/update`,{
+            method: 'PUT',
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userData),
+        });
+       // API call failed
+       if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || `HTTP error! Status: ${response.status}`);
+    };
+        // API call succeeded
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+        return {
+            success: false,
+            message: error.message
+        };
+    };
+};
+
 // Add Pending User
 export const httpAddPendingUser = async (userData) => {
     try {

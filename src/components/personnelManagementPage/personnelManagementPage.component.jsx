@@ -3,22 +3,27 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../contexts/user.context';
 import { Navigate } from 'react-router-dom';
 import { httpFetchAllUsers } from '../../hooks/requests';
-import AddUserPage from '../addUserPage/addUserPage.component';
+import AddUserModal from '../AddUserModal/AddUserModal.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faWrench, faLink } from '@fortawesome/free-solid-svg-icons';
+import { faWrench, faLink, faSquareXmark } from '@fortawesome/free-solid-svg-icons';
 import { ReactComponent as Loading } from '../../icons/loading.svg';
 import Modal from '../modal/modal.component';
+import UpdateUserModal from '../UpdateUserModal/updateUserModal.component';
+
 
 
 const PersonnelManagementPage = () => {
 
-    const [copiedUserId, setCopiedUserId] = useState("");
+    const [ copiedUserId, setCopiedUserId ] = useState("");
     const { currentUser } = useContext(UserContext);
     const [ allUsers, setAllUsers ] = useState([]);
     const [ errorMessage, setErrorMessage ] = useState('');
     const [ isModalVisible, setIsModalVisible ] = useState(false);
     const [ isAddingUser, setIsAddingUser ] = useState(false);
+    const [ isUpdatingUser, setIsUpdatingUser ] = useState(false);
     const [ isLoading, setIsLoading ] = useState(false);
+    const [ selectedUser, setSelectedUser] = useState(null);
+
 
     useEffect(() => {
         let isMounted = true;
@@ -51,16 +56,6 @@ const PersonnelManagementPage = () => {
         
      }, [currentUser]);
 
-
-     const handleUserAdded = (newUser) => {
-        // When a user is successfully added, update the 'allUsers' state
-        setAllUsers((prevAllUsers) => [...prevAllUsers, newUser]);
-      };
-
-     const updateUser = async () => {
-        console.log('Updating User');
-     };
-
      const closeModal = () => {
         setIsModalVisible(false);
         setErrorMessage(''); // Clear the error message
@@ -68,9 +63,28 @@ const PersonnelManagementPage = () => {
 
     const toggleIsAddingUser = () => {
         setIsAddingUser(prevState => !prevState);
-      };
+    };
 
-    const handleLink = async (id) => {
+    const toggleIsUpdatingUser = (user) => {
+        setSelectedUser(user);
+        // Pass selected user data to defaultUserInfo 
+        setIsUpdatingUser(prevState => !prevState);
+    };
+
+    const handleUserAdded = (returnedUser) => {
+        // When a user is successfully added, update the 'allUsers' state
+        setAllUsers((prevAllUsers) => [...prevAllUsers, returnedUser]);
+    };
+
+    const handleUserUpdated = (returnedUser) => {
+        const updatedUsersList = allUsers.map(user => 
+            user._id === returnedUser._id ? returnedUser : user
+        );
+    
+        setAllUsers(updatedUsersList);
+    };
+
+    const handleCopyLink = async (id) => {
         const domain = `${window.location.origin}/initial-password/${id}`;
 
         try {
@@ -106,7 +120,7 @@ const PersonnelManagementPage = () => {
                         <th>薪资</th>
                         <th>访问等级</th>
                         <th>状态</th>
-                        <th>修改</th>
+                        <th>修改或删除</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,7 +136,7 @@ const PersonnelManagementPage = () => {
                                 user.status === 'pending'? 
                                     <div className='status-container'>
                                         <span>{user.status}</span>
-                                        <FontAwesomeIcon icon={faLink} onClick={() => {handleLink(user._id)}} className='link-icon' />
+                                        <FontAwesomeIcon icon={faLink} onClick={() => {handleCopyLink(user._id)}} className='link-icon' />
                                         {copiedUserId === user._id && 
                                         <div className="copied-msg">已复制</div>}
                                     </div>
@@ -130,7 +144,12 @@ const PersonnelManagementPage = () => {
                                     user.status
                             }
                             </td>
-                            <td><FontAwesomeIcon icon={faWrench} onClick={updateUser} className='update-icon' /></td>
+                            <td>
+                                <div className='modify-user-buttons'>
+                                    <FontAwesomeIcon icon={faWrench} onClick={() => {toggleIsUpdatingUser(user)}} className='update-icon' />
+                                    <FontAwesomeIcon icon={faSquareXmark} onClick={() => {console.log('Delete Button Clicked')}} className='delete-icon' />
+                                </div>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
@@ -140,10 +159,25 @@ const PersonnelManagementPage = () => {
                 isLoading && <Loading className='loadingIcon' />
             }
             {   isModalVisible && 
-            <Modal message={errorMessage} onClose={closeModal} signOut={true} />
+            <Modal message={errorMessage} 
+                onClose={closeModal} 
+                signOut={true} 
+            />
             }
             {
-                isAddingUser && <AddUserPage setIsAddingUser={setIsAddingUser} onUserAdded={handleUserAdded}/>
+                isAddingUser && 
+                    <AddUserModal 
+                        setIsAddingUser={setIsAddingUser} 
+                        onUserAdded={handleUserAdded}
+                    />
+            }
+            {
+                isUpdatingUser && 
+                    <UpdateUserModal 
+                        setIsUpdatingUser={setIsUpdatingUser} 
+                        selectedUser = {selectedUser} 
+                        onUserUpdated={handleUserUpdated} 
+                    />
             }
         </div> :
         <Navigate to='/' />

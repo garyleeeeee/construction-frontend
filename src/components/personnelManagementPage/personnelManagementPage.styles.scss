@@ -52,13 +52,29 @@
         }
     }
 
+    .modify-user-buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
     .link-icon, .update-icon {
         cursor: pointer;
         color: #345995;
+        font-size: 1rem;
 
         &:hover {
             color: #0056b3;
+        }
+    }
+
+    .delete-icon {
+        cursor: pointer;
+        color: #345995;
+        font-size: 1rem;
+
+        &:hover {
+            color: red;
         }
     }
 

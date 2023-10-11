@@ -1,75 +1,57 @@
-import './addUserPage.styles.scss';
+import './AddUserModal.styles.scss';
 import { useState } from 'react';
 import { ReactComponent as CloseIcon } from '../../icons/close.svg';
 import { httpAddPendingUser } from '../../hooks/requests';
 import { ReactComponent as Loading } from '../../icons/loading.svg';
 
-
-const AddUserPage = ({setIsAddingUser, onUserAdded}) => {
-
-    const [ isLoading, setIsLoading ] = useState(false);
-    const [ errorMessage, setErrorMessage ] = useState('');
+const AddUserModal = ({ setIsAddingUser, onUserAdded }) => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const [formData, setFormData] = useState({
         name: '',
         accessLevel: 0,
         role: '员工',
         phoneNumber: '',
         salary: 0
-      });
-
-    function containsOnlyNumbers(input) {
-        return /^[0-9]+$/.test(input);
-    }
+    });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-
-        // Convert value for specific fields
-        const finalValue = (name === 'accessLevel' || name === 'salary') ? +value : value;
+        const finalValue = ['accessLevel', 'salary'].includes(name) ? +value : value;
         setFormData(prevData => ({ ...prevData, [name]: finalValue }));
     };
 
     const handleSubmit = async (e) => {
-        setIsLoading(true);
         e.preventDefault();
         setErrorMessage('');
 
-        // Validate the phoneNumber input
-        if (!containsOnlyNumbers(formData.phoneNumber)) {
-            setIsLoading(false);
+        if (!/^[0-9]+$/.test(formData.phoneNumber)) {
             setErrorMessage('电话号码有误！');
-            return;  // Exit early if validation fails
+            return;
         }
 
+        setIsLoading(true);
         const response = await httpAddPendingUser(formData);
 
         if (response.success) {
-            setIsLoading(false);
-            // Call the callback function to notify the parent component
-            if (onUserAdded) {
-                onUserAdded(response.data); // Pass the newly added user data to the parent
-            };
-            // Close the window
+            onUserAdded?.(response.data);
             setIsAddingUser(false);
         } else {
-            setIsLoading(false);
-            // Notification on top about Error
-            console.log(response.message);
             setErrorMessage(response.message);
         }
+        setIsLoading(false);
     }
 
     return (
         <div className='add-user-page-overlay'>
             <div className='add-user-page-content'>
-            <CloseIcon className="close-button" onClick={() => setIsAddingUser(false)}/>
+                <CloseIcon className="close-button" onClick={() => setIsAddingUser(false)} />
                 <h2>新增人员信息</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="input-group">
                         <label htmlFor="name">姓名</label>
                         <input 
                             type="text" 
-                            id="name" 
                             name="name"
                             value={formData.name}
                             onChange={handleChange} 
@@ -79,7 +61,6 @@ const AddUserPage = ({setIsAddingUser, onUserAdded}) => {
                     <div className="input-group">
                         <label htmlFor="accessLevel">访问等级</label>
                         <select 
-                            id="accessLevel" 
                             name="accessLevel"
                             onChange={handleChange} 
                             required
@@ -95,7 +76,6 @@ const AddUserPage = ({setIsAddingUser, onUserAdded}) => {
                     <div className="input-group">
                         <label htmlFor="role">职务</label>
                         <select 
-                            id="role" 
                             name="role"
                             onChange={handleChange} 
                             required
@@ -122,7 +102,6 @@ const AddUserPage = ({setIsAddingUser, onUserAdded}) => {
                         <label htmlFor="salary">薪资</label>
                         <input 
                             type="number" 
-                            id="salary" 
                             name="salary"
                             value={formData.salary}
                             onChange={handleChange} 
@@ -133,7 +112,6 @@ const AddUserPage = ({setIsAddingUser, onUserAdded}) => {
                         <label htmlFor="phoneNumber">电话号码</label>
                         <input 
                             type="text" 
-                            id="phoneNumber" 
                             name="phoneNumber"
                             value={formData.phoneNumber}
                             onChange={handleChange} 
@@ -141,15 +119,12 @@ const AddUserPage = ({setIsAddingUser, onUserAdded}) => {
                         />
                     </div>
                     {errorMessage && <h4 className='errorMessage'>{errorMessage}</h4>}
-                    <button type="submit">完成</button>
+                    <button type="submit">添加</button>
                 </form>
-                {
-                isLoading && <Loading className='loadingIcon' />
-                }
+                {isLoading && <Loading className='loadingIcon' />}
             </div>
         </div>
     );
 };
 
-
-export default AddUserPage;
+export default AddUserModal;

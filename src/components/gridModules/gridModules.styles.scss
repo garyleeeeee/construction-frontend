@@ -4,6 +4,7 @@
     height: calc(100svh - var(--navbar-height));
     padding: 0px 20px;
 
+
     .top-header {
         // top: var(--navbar-height);
         display: flex;
@@ -54,6 +55,7 @@
             background-color: whitesmoke;
             border-radius: 15px;
             gap: 10px;
+            
 
             .module-link {
                 text-decoration: none;

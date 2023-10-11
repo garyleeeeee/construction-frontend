@@ -1,0 +1,112 @@
+.update-user-page-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; // Ensure overlay is above other page content
+
+    .update-user-page-content {
+        position: relative;
+        width: 80%;
+        max-width: 500px;
+        padding: 30px;
+        background-color: white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+
+        form {
+            max-height: 450px;
+            overflow-y: scroll;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 1px solid #e1e1e1;
+            padding-bottom: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+            label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: 600;
+            }
+
+            input, select {
+                width: 100%;
+                padding: 10px 15px;
+                border: 1px solid #e1e1e1;
+                border-radius: 3px;
+                font-size: 1em;
+            }
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px 15px;
+            background-color: #345995;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: #0056b3;
+            };
+        }
+
+        .errorMessage {
+            width: 100%;
+            margin: 10px 0px; /* Add margin to center vertically */
+            color: red; /* Set the text color */
+            font-weight: bold;
+        }
+
+        .close-button {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            top: 10px;
+            right: 10px;
+            background: #345995;
+            border: none;
+            font-size: 1em;
+            cursor: pointer;
+            transition: color 0.3s;
+            color: #888;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            z-index: 9999;
+    
+            &:hover {
+                background: #0056b3;
+            }
+    
+            // Ensure the button doesn't take focus styles as it might look off
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+}
+
+
+/* Media query for screens larger than 168px */
+@media (min-width: 768px) {
+    .update-user-page-overlay .update-user-page-content form {
+        max-height: unset;
+    }
+}
