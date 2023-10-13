@@ -3,13 +3,13 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../contexts/user.context';
 import { Navigate } from 'react-router-dom';
 import { httpFetchAllUsers, httpDeleteUser } from '../../hooks/requests';
-import AddUserModal from '../addUserModal/addUserModal.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWrench, faLink, faSquareXmark } from '@fortawesome/free-solid-svg-icons';
 import { ReactComponent as Loading } from '../../icons/loading.svg';
 import Modal from '../modal/modal.component';
-import UpdateUserModal from '../updateUserModal/updateUserModal.component';
 import AlertModal from '../alertModal/alertModal.component';
+import UpdateUserModal from '../updateUserModal1/updateUserModal.component';
+import AddUserModal from '../addUserModal1/addUserModal.component';
 
 
 const PersonnelManagementPage = () => {
