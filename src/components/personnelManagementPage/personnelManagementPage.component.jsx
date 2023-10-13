@@ -98,8 +98,6 @@ const PersonnelManagementPage = () => {
 
     // Execute user deletion
     const handleUserDeletion = async () => {
-        console.log('deleting user:')
-        console.log(selectedUser);
         try {
             setIsLoading(true);
             if (!selectedUser) {

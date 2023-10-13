@@ -9,7 +9,7 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);  /* Semi-transparent black background */
-    z-index: 1000; /* Ensures the modal is on top */
+    z-index: 998; /* Ensures the modal is on top */
 }
 
 /* Container for modal content */

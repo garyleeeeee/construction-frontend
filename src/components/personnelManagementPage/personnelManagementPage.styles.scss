@@ -78,6 +78,10 @@
         }
     }
 
+    .loading-icon {
+        z-index: 9999;
+    }
+
     .table-responsive {
         width: 100%;
         overflow-x: auto;
