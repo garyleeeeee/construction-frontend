@@ -2,14 +2,14 @@ import './personnelManagementPage.styles.scss';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../contexts/user.context';
 import { Navigate } from 'react-router-dom';
-import { httpFetchAllUsers } from '../../hooks/requests';
-import AddUserModal from '../AddUserModal/AddUserModal.component';
+import { httpFetchAllUsers, httpDeleteUser } from '../../hooks/requests';
+import AddUserModal from '../addUserModal/addUserModal.component';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWrench, faLink, faSquareXmark } from '@fortawesome/free-solid-svg-icons';
 import { ReactComponent as Loading } from '../../icons/loading.svg';
 import Modal from '../modal/modal.component';
-import UpdateUserModal from '../UpdateUserModal/updateUserModal.component';
-
+import UpdateUserModal from '../updateUserModal/updateUserModal.component';
+import AlertModal from '../alertModal/alertModal.component';
 
 
 const PersonnelManagementPage = () => {
@@ -23,6 +23,7 @@ const PersonnelManagementPage = () => {
     const [ isUpdatingUser, setIsUpdatingUser ] = useState(false);
     const [ isLoading, setIsLoading ] = useState(false);
     const [ selectedUser, setSelectedUser] = useState(null);
+    const [ isDeletingUser, setIsDeletingUser ] = useState(false);
 
 
     useEffect(() => {
@@ -61,28 +62,84 @@ const PersonnelManagementPage = () => {
         setErrorMessage(''); // Clear the error message
     };
 
+    // Add a new User
     const toggleIsAddingUser = () => {
         setIsAddingUser(prevState => !prevState);
     };
 
+    // User added callback function
+    const handleUserAdded = (returnedUser) => {
+        // When a user is successfully added, update the 'allUsers' state
+        setAllUsers((prevAllUsers) => [...prevAllUsers, returnedUser]);
+    };
+
+    // Update a user
     const toggleIsUpdatingUser = (user) => {
         setSelectedUser(user);
         // Pass selected user data to defaultUserInfo 
         setIsUpdatingUser(prevState => !prevState);
     };
 
-    const handleUserAdded = (returnedUser) => {
-        // When a user is successfully added, update the 'allUsers' state
-        setAllUsers((prevAllUsers) => [...prevAllUsers, returnedUser]);
-    };
-
+    // User updated callback function
     const handleUserUpdated = (returnedUser) => {
         const updatedUsersList = allUsers.map(user => 
             user._id === returnedUser._id ? returnedUser : user
         );
     
         setAllUsers(updatedUsersList);
+        setSelectedUser(null);
     };
+
+    // Delete button pressed
+    const toggleIsDeletingUser = (user) => {
+        setSelectedUser(user);
+        setIsDeletingUser(prevState => !prevState);
+    };
+
+    // Execute user deletion
+    const handleUserDeletion = async () => {
+        console.log('deleting user:')
+        console.log(selectedUser);
+        try {
+            setIsLoading(true);
+            if (!selectedUser) {
+                setIsLoading(false);
+                throw new Error('用户出错，请重试！')
+            };
+            const response = await httpDeleteUser(selectedUser);
+            
+            if (response.message === 'ID有误，用户删除失败!') {
+                setIsLoading(false);
+                setErrorMessage('用户ID无效导致删除失败，请重试！');
+                setIsDeletingUser(false);
+                setSelectedUser(null);
+            } else 
+            if (!response.success) {
+                setIsLoading(false);
+                setIsDeletingUser(false);
+                setErrorMessage('用户删除失败！');
+                setSelectedUser(null);
+            } else {
+                // Succeeded
+                setIsLoading(false);
+                const {_id} = response.data;
+                // Handle returned Deleted User
+                const updatedAllUsers = allUsers.filter(user=>user._id!==_id);
+                setAllUsers(updatedAllUsers);
+                setIsDeletingUser(false);
+                setSelectedUser(null);
+            } 
+
+
+
+
+
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+
 
     const handleCopyLink = async (id) => {
         const domain = `${window.location.origin}/initial-password/${id}`;
@@ -147,7 +204,7 @@ const PersonnelManagementPage = () => {
                             <td>
                                 <div className='modify-user-buttons'>
                                     <FontAwesomeIcon icon={faWrench} onClick={() => {toggleIsUpdatingUser(user)}} className='update-icon' />
-                                    <FontAwesomeIcon icon={faSquareXmark} onClick={() => {console.log('Delete Button Clicked')}} className='delete-icon' />
+                                    <FontAwesomeIcon icon={faSquareXmark} onClick={()=> toggleIsDeletingUser(user)} className='delete-icon' />
                                 </div>
                             </td>
                         </tr>
@@ -178,6 +235,20 @@ const PersonnelManagementPage = () => {
                         selectedUser = {selectedUser} 
                         onUserUpdated={handleUserUpdated} 
                     />
+            }
+            {
+                isDeletingUser && 
+                    <AlertModal 
+                        promptMessage={<>
+是否确定要删除用户
+<br/> 【{selectedUser.name}】
+                        </>}
+                        primaryLabel='删除'
+                        primaryFunction={handleUserDeletion}
+                        secondaryLabel='取消'
+                        secondaryFunction={()=>{setIsDeletingUser(prevState=>!prevState)}}
+                    />
+                 
             }
         </div> :
         <Navigate to='/' />

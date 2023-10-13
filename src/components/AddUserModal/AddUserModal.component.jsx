@@ -1,4 +1,4 @@
-import './AddUserModal.styles.scss';
+import './addUserModal.styles.scss';
 import { useState } from 'react';
 import { ReactComponent as CloseIcon } from '../../icons/close.svg';
 import { httpAddPendingUser } from '../../hooks/requests';

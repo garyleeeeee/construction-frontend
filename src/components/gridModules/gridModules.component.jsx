@@ -9,7 +9,7 @@ import Modal from '../modal/modal.component';
 
 
 const GridModules = ({toggleMenu}) => {
-    const {currentUser, setCurrentUser} = useContext(UserContext);
+    const {currentUser } = useContext(UserContext);
     const [ isModalVisible, setIsModalVisible ] = useState(false);
     const [ modalMessage, setModalMessage ] = useState('');
 

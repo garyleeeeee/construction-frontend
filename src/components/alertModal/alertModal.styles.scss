@@ -1,0 +1,69 @@
+/* Base styles for the modal overlay */
+.alert-modal-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);  /* Semi-transparent black background */
+    z-index: 1000; /* Ensures the modal is on top */
+}
+
+/* Container for modal content */
+.alert-modal-content {
+    width: 80%; /* Takes up 80% of the screen width, can be adjusted */
+    max-width: 300px; /* Max width for larger screens */
+    padding: 20px;
+    background: #ffffff; /* White background for the modal */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+}
+
+/* Heading styling */
+.alert-modal-content h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 16px; /* Some space after the heading */
+    color: #333; /* Dark gray color for the text */
+    font-weight: 600; /* Semi-bold */
+}
+
+/* Container for buttons */
+.alert-modal-functions-container {
+    display: flex;
+    justify-content: space-between; /* Space the buttons evenly */
+    margin-top: 20px; /* Space above the button container */
+}
+
+/* Base button styling */
+.alert-modal-functions-container button {
+    padding: 10px 20px; /* Vertical and horizontal padding */
+    border: none;
+    border-radius: 5px; /* Rounded corners for the buttons */
+    font-weight: 500; /* Semi-bold text */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Secondary button styling */
+.alert-modal-secondary-button {
+    background-color: #f4f4f4; /* Light gray background */
+    color: #333; /* Dark gray text */
+}
+
+.alert-modal-secondary-button:hover {
+    background-color: #e0e0e0; /* Darken the background slightly on hover */
+}
+
+/* Primary button styling */
+.alert-modal-primary-button {
+    background-color: #007bff; /* Blue background */
+    color: #ffffff; /* White text */
+}
+
+.alert-modal-primary-button:hover {
+    background-color: #0056b3; /* Darken the background slightly on hover */
+}
