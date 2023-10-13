@@ -8,8 +8,8 @@ import { faWrench, faLink, faSquareXmark } from '@fortawesome/free-solid-svg-ico
 import { ReactComponent as Loading } from '../../icons/loading.svg';
 import Modal from '../modal/modal.component';
 import AlertModal from '../alertModal/alertModal.component';
-import UpdateUserModal from '../updateUserModal1/updateUserModal.component';
-import AddUserModal from '../addUserModal1/addUserModal.component';
+import UpdateUserModal from '../updateUserModal/updateUserModal.component';
+import AddUserModal from '../addUserModal/addUserModal.component';
 
 
 const PersonnelManagementPage = () => {
