@@ -57,7 +57,7 @@ const PersonnelManagementPage = () => {
         
      }, [currentUser]);
 
-     const closeModal = () => {
+    const closeModal = () => {
         setIsModalVisible(false);
         setErrorMessage(''); // Clear the error message
     };
@@ -138,7 +138,6 @@ const PersonnelManagementPage = () => {
     }
 
 
-
     const handleCopyLink = async (id) => {
         const domain = `${window.location.origin}/initial-password/${id}`;
 
@@ -211,7 +210,7 @@ const PersonnelManagementPage = () => {
                 </table>
             </div>
             {
-                isLoading && <Loading className='loadingIcon' />
+                isLoading && <Loading className='loading-icon' />
             }
             {   isModalVisible && 
             <Modal message={errorMessage} 
@@ -238,7 +237,7 @@ const PersonnelManagementPage = () => {
                 isDeletingUser && 
                     <AlertModal 
                         promptMessage={<>
-是否确定要删除用户
+确定要删除用户
 <br/> 【{selectedUser.name}】
                         </>}
                         primaryLabel='删除'

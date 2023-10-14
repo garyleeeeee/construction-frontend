@@ -50,10 +50,10 @@ const SignInForm = () => {
       <h1>登录信息</h1>
       <form onSubmit={handleSubmit}>
         <div className="input-group">
-          <label htmlFor="name">姓名</label>
+          <label htmlFor="sign-in-name">姓名</label>
           <input 
             type="text" 
-            id="name" 
+            id="sign-in-name" 
             name="name"
             value={formData.name}
             onChange={handleChange} 
@@ -61,10 +61,10 @@ const SignInForm = () => {
           />
         </div>
         <div className="input-group">
-          <label htmlFor="password">密码</label>
+          <label htmlFor="sign-in-password">密码</label>
           <input 
             type="password" 
-            id="password" 
+            id="sign-in-password" 
             name="password"
             value={formData.password}
             onChange={handleChange} 

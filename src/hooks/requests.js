@@ -114,6 +114,7 @@ export const httpUpdateUser = async (userData) => {
     };
 };
 
+// Delete a user
 export const httpDeleteUser = async (userData) => {
     try {
         const response = await fetch(`${API_URL}/users/delete`,{
@@ -171,6 +172,33 @@ export const httpAddPendingUser = async (userData) => {
 export const httpInitialisePassword = async (userData) => {
     try {
         const response = await fetch(`${API_URL}/users/password`,{
+            method: 'POST',
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userData),
+        });
+        // API call failed
+       if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || `HTTP error! Status: ${response.status}`);
+    };
+        // API call succeeded
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+        return {
+            success: false,
+            message: error.message
+        };
+    };
+};
+
+
+export const httpUpdateUserPassword = async (userData) => {
+    try {
+        const response = await fetch(`${API_URL}/users/update-password`,{
             method: 'POST',
             headers: {
             "Content-Type": "application/json",

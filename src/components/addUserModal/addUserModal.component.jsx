@@ -49,9 +49,10 @@ const AddUserModal = ({ setIsAddingUser, onUserAdded }) => {
                 <h2>新增人员信息</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="input-group">
-                        <label htmlFor="name">姓名</label>
+                        <label htmlFor="add-name">姓名</label>
                         <input 
                             type="text" 
+                            id='add-name'
                             name="name"
                             value={formData.name}
                             onChange={handleChange} 
@@ -59,9 +60,10 @@ const AddUserModal = ({ setIsAddingUser, onUserAdded }) => {
                         />
                     </div>
                     <div className="input-group">
-                        <label htmlFor="accessLevel">访问等级</label>
+                        <label htmlFor="add-accessLevel">访问等级</label>
                         <select 
                             name="accessLevel"
+                            id='add-accessLevel'
                             onChange={handleChange} 
                             required
                         >
@@ -74,9 +76,10 @@ const AddUserModal = ({ setIsAddingUser, onUserAdded }) => {
                         </select>
                     </div>
                     <div className="input-group">
-                        <label htmlFor="role">职务</label>
+                        <label htmlFor="add-role">职务</label>
                         <select 
                             name="role"
+                            id='add-role'
                             onChange={handleChange} 
                             required
                         >
@@ -99,19 +102,21 @@ const AddUserModal = ({ setIsAddingUser, onUserAdded }) => {
                         </select>
                     </div>
                     <div className="input-group">
-                        <label htmlFor="salary">薪资</label>
+                        <label htmlFor="add-salary">薪资</label>
                         <input 
                             type="number" 
                             name="salary"
+                            id='add-salary'
                             value={formData.salary}
                             onChange={handleChange} 
                             required
                         />
                     </div>
                     <div className="input-group">
-                        <label htmlFor="phoneNumber">电话号码</label>
+                        <label htmlFor="add-phoneNumber">电话号码</label>
                         <input 
                             type="text" 
+                            id='add-phoneNumber'
                             name="phoneNumber"
                             value={formData.phoneNumber}
                             onChange={handleChange} 

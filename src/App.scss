@@ -10,9 +10,6 @@
   margin: 0px auto;
 }
 
-#root {
-  background-color: #345995 !important;
-}
 
 * {
   box-sizing: border-box;
@@ -21,16 +18,22 @@
   scroll-behavior: smooth;
 }
 
+#root {
+  width: 100%;
+  position: relative;
+}
+
 html {
   font-size: 16px;
-  min-width: 360px;
-  max-width: 1800px;
-  background-color: #FFFFFF;
+  background-color: whitesmoke;
 }
 
 body {
   font-family: 'SFPRO', sans-serif;
   width: 100%;
+  min-width: 360px;
+  max-width: 3000px;
+  margin: 0px auto;
   min-height: 100svh;
   background-color: #FFFFFF;
 }
