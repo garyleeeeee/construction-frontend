@@ -6,10 +6,10 @@ import { httpFetchAllUsers, httpDeleteUser } from '../../hooks/requests';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWrench, faLink, faSquareXmark } from '@fortawesome/free-solid-svg-icons';
 import { ReactComponent as Loading } from '../../icons/loading.svg';
-import Modal from '../modal/modal.component';
-import AlertModal from '../alertModal/alertModal.component';
-import UpdateUserModal from '../updateUserModal/updateUserModal.component';
-import AddUserModal from '../addUserModal/addUserModal.component';
+import AlertModal from '../../components/alertModal/alertModal.component'
+import UpdateUserModal from '../../components/updateUserModal/updateUserModal.component';
+import AddUserModal from '../../components/addUserModal/addUserModal.component';
+import Modal from '../../components/modal/modal.component';
 
 
 const PersonnelManagementPage = () => {
@@ -160,7 +160,7 @@ const PersonnelManagementPage = () => {
         currentUser ?
         <div className='personnel-management-page-container'>
             <h1>人事管理</h1>
-            <div className='function-buttons'>
+            <div className='pm-function-buttons'>
                 <button onClick={toggleIsAddingUser}>新增人员</button>
             </div>
             <div className="table-responsive">

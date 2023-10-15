@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Outlet } from "react-router-dom";
 import './navBar.styles.scss';
-import SideMenu from '../sideMenu/sideMenu.component';
+import SideMenu from '../../components/sideMenu/sideMenu.component';
 import { ReactComponent as HamIcon } from '../../icons/menu.svg';
 import { ReactComponent as CloseIcon } from '../../icons/close.svg';
 

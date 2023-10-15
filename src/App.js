@@ -1,13 +1,14 @@
 import './App.scss';
 import React, { useContext, useEffect, useState } from 'react';
 import { Routes, Route } from "react-router-dom";
-import NavBar from './components/navBar/navBar.component';
-import HomePage from './components/homePage/homePage.component';
+import NavBar from './routes/navBar/navBar.component';
+import HomePage from './routes/homePage/homePage.component';
 import { UserContext } from './contexts/user.context';
-import WarehousePage from './components/warehousePage/warehousePage.component';
-import PersonalInfoPage from './components/personalInfoPage/personalInfoPage.component';
-import PersonnelManagementPage from './components/personnelManagementPage/personnelManagementPage.component';
+import WarehousePage from './routes/warehousePage/warehousePage.component';
+import PersonalInfoPage from './routes/personalInfoPage/personalInfoPage.component';
+import PersonnelManagementPage from './routes/personnelManagementPage/personnelManagementPage.component';
 import InitialPasswordPage from './components/initialPasswordPage/initialPasswordPage.component';
+
 
 function App() {
   const { setCurrentUser } = useContext(UserContext);
