@@ -81,7 +81,6 @@ export default function WareHouseSearchSection() {
 
         setSelectedCategory(null);
         setSearchResult(inputValue);
-        setInputValue('');
         setIsOpen(false);
     };
 
