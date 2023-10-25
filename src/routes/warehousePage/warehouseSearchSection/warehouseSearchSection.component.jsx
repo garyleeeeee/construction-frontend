@@ -17,7 +17,7 @@ function SearchBar({ value, onChange, onConfirm }) {
         <div className='warehouse-search-bar'>
             <input
                 type='search'
-                placeholder='查询货物名称或编号'
+                placeholder='输入货物名称查询'
                 name='warehouse-search-bar'
                 value={value}
                 onChange={onChange}
@@ -27,7 +27,7 @@ function SearchBar({ value, onChange, onConfirm }) {
             </button>
         </div>
     );
-}
+};
 
 function CategorySelector({ isOpen, onToggle, selectedCategory, onSelect }) {
     return (

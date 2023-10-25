@@ -4,11 +4,13 @@ import { UserContext } from '../../contexts/user.context';
 import { Navigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faScrewdriverWrench } from '@fortawesome/free-solid-svg-icons';
-import WareHouseSearchSection from '../../components/warehouseSearchSection/warehouseSearchSection.component';
+import WareHouseSearchSection from './warehouseSearchSection/warehouseSearchSection.component';
+import WarehouseManagementPage from './warehouseManagementPage/warehouseManagementPage.component';
 
 const WarehousePage = () => {
     const { currentUser } = useContext(UserContext);
     const [ basketItemsCount, setBasketItemsCount ] = useState(0);
+    const [ showsManagementPage, setShowsManagementPage ] = useState(false);
 
     return (
         currentUser ?
@@ -26,7 +28,10 @@ const WarehousePage = () => {
                     
                 </div>
             </div>
-                <WareHouseSearchSection />
+                {showsManagementPage ?
+                <WarehouseManagementPage />:<WareHouseSearchSection />
+                }
+                
         </div> :
             <Navigate to='/' />
     );

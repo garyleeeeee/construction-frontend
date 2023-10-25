@@ -4,6 +4,7 @@ import './signInForm.styles.scss';
 import { httpSignInUser } from '../../hooks/requests';
 import { ReactComponent as Loading } from '../../icons/loading.svg';
 
+
 const SignInForm = () => {
   const [ errorMessage, setErrorMessage ] = useState('');
   const [ isLoading, setIsLoading ] = useState(false);
