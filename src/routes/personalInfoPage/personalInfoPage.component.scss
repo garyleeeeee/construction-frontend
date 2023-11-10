@@ -1,5 +1,7 @@
 .personal-info-page-container {
     position: relative;
+    padding: 20px 20px;
     top: var(--navbar-height);
+    height: calc(100svh - var(--navbar-height));
     background-color: #FEFEFE;
 }

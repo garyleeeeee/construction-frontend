@@ -135,7 +135,7 @@ const PersonnelManagementPage = () => {
         } catch (error) {
             console.log(error.message)
         }
-    }
+    };
 
 
     const handleCopyLink = async (id) => {
@@ -153,11 +153,15 @@ const PersonnelManagementPage = () => {
         } catch (err) {
             alert('Failed to copy the link.');
         }
-    }
+    };
     
+    // Check for currentUser, redirect if not found
+    if (!currentUser) {
+        return <Navigate to='/' />;
+    }
 
     return (
-        currentUser ?
+
         <div className='personnel-management-page-container'>
             <h1>人事管理</h1>
             <div className='pm-function-buttons'>
@@ -237,8 +241,8 @@ const PersonnelManagementPage = () => {
                 isDeletingUser && 
                     <AlertModal 
                         promptMessage={<>
-确定要删除用户
-<br/> 【{selectedUser.name}】
+                            确定要删除用户
+                            <br/> 【{selectedUser.name}】
                         </>}
                         primaryLabel='删除'
                         primaryFunction={handleUserDeletion}
@@ -247,8 +251,7 @@ const PersonnelManagementPage = () => {
                     />
                  
             }
-        </div> :
-        <Navigate to='/' />
+        </div> 
     );
 
 }

@@ -1,7 +1,9 @@
 import './warehouseSearchSection.styles.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faCircleChevronUp, faCircleChevronDown, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UserContext } from '../../contexts/user.context';
+import { Navigate } from 'react-router-dom';
 
 const categories = [
     '办公用品','生活用品','办公设备','生活设备',
@@ -73,6 +75,7 @@ export default function WareHouseSearchSection() {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [inputValue, setInputValue] = useState('');
     const [searchResult, setSearchResult] = useState('');
+    const { currentUser } = useContext(UserContext);
 
     const handleInputChange = (e) => setInputValue(e.target.value);
 
@@ -96,6 +99,11 @@ export default function WareHouseSearchSection() {
         setSearchResult('');
         setInputValue('');
     };
+
+    // Check for currentUser, redirect if not found
+    if (!currentUser) {
+        return <Navigate to='/' />;
+        }
 
     return (
         <div className='warehouse-search-section'>

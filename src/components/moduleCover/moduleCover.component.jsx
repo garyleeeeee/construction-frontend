@@ -1,6 +1,6 @@
 import './moduleCover.styles.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouse, faIdBadge, faWarehouse, faCircleQuestion, faCar, faPeopleGroup} from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faIdBadge, faWarehouse, faCircleQuestion, faCar, faPeopleGroup, faSearch, faToolbox} from '@fortawesome/free-solid-svg-icons';
 
 const moduleNameToIcon = (moduleName) => {
     let iconName;
@@ -23,8 +23,11 @@ const moduleNameToIcon = (moduleName) => {
         // case '进度管理':
         //     iconName = faBarsProgress;
         //     break
-        case '仓库':
-            iconName = faWarehouse;
+        case '仓库搜索':
+            iconName = faSearch;
+            break
+        case '仓库管理':
+            iconName = faToolbox;
             break
         case '车辆管理':
             iconName = faCar;

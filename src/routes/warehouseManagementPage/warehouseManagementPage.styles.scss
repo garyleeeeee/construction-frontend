@@ -1,0 +1,46 @@
+.warehouse-management-page-container {
+    position: relative;
+    padding: 20px 20px;
+    top: var(--navbar-height);
+    height: calc(100svh - var(--navbar-height));
+    background-color: #FEFEFE;
+
+    h1 {
+        margin-bottom: 20px;
+        font-size: 1.6em;
+    };
+
+    .module-buttons {
+        display: flex;
+        margin-bottom: 20px;
+
+        .module-button {
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 4px 4px 0px 0px;
+            border: none;
+            transition: all 0.3s ease-in-out;
+            padding: 10px 20px;
+            border: none;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: bold;
+
+            &:hover {
+                background-color: #0F3167;
+                color: white;
+            }
+        }
+
+        .selected-module-button {
+            background-color: #345995;
+            color: white;
+        }
+
+        .unselected-module-button {
+            color: gray;
+            background-color: lightgray;
+        }
+    }
+}

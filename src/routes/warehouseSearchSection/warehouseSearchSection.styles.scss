@@ -2,8 +2,12 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    position: relative;
+    top: var(--navbar-height);
+    height: calc(100svh - var(--navbar-height));
+    background-color: whitesmoke;
+    padding: 30px;
 
     .warehouse-search-bar {
         width: 100%;

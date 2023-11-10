@@ -36,17 +36,26 @@ const GridModules = ({toggleMenu}) => {
                     <Link to='/' onClick={toggleMenu} className='module-link' >
                         <ModuleCover moduleName='主页'/>
                     </Link>
-                    <Link to='/warehouse' onClick={toggleMenu} className='module-link' >
-                        <ModuleCover moduleName='仓库'/>
-                    </Link>
+                </div>
+                <div className='module-links'>
                     <Link to='/personal-info' onClick={toggleMenu} className='module-link' >
                         <ModuleCover moduleName='个人信息'/>
                     </Link>
+                    <Link to='/personnel-management' onClick={toggleMenu} className='module-link' >
+                            <ModuleCover moduleName='人事管理'/>
+                    </Link>
+                </div>
+                <div className='module-links'>
+                    <Link to='/warehouse/search' onClick={toggleMenu} className='module-link' >
+                        <ModuleCover moduleName='仓库搜索'/>
+                    </Link>
+                    <Link to='/warehouse/management' onClick={toggleMenu} className='module-link' >
+                        <ModuleCover moduleName='仓库管理'/>
+                    </Link>
+                </div>
+                <div className='module-links'>
                     <Link to='/cars' onClick={toggleMenu} className='module-link' >
                         <ModuleCover moduleName='车辆管理'/>
-                    </Link>
-                    <Link to='/personnel-management' onClick={toggleMenu} className='module-link' >
-                        <ModuleCover moduleName='人事管理'/>
                     </Link>
                 </div>
             </div>
