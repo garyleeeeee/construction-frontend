@@ -11,6 +11,8 @@
     z-index: 1000; // Ensure overlay is above other page content
 
     .update-user-page-content {
+        max-height: 90vh; // maximum height of the form container
+        overflow-y: auto;
         position: relative;
         width: 80%;
         max-width: 500px;

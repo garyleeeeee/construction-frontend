@@ -3,11 +3,13 @@ import { useEffect, useState } from 'react';
 import { httpGetAllProducts } from '../../hooks/requests';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import AddProductForm from '../../components/addProductForm/addProductForm.components';
+
 
 const ProductsManagementPage = () => {
     const [ allProducts, setAllProducts ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(false);
-
+    const [ isAddingProduct, setIsAddingProduct ] = useState(false);
 
     useEffect(() => {
         let isMounted = true;
@@ -43,7 +45,7 @@ const ProductsManagementPage = () => {
     return (
         <div className='products-management-page-container'>
             <div className='header-area'> 
-                <button className='add-product-button'>
+                <button className='add-product-button' onClick={()=>{setIsAddingProduct(true)}}>
                     <FontAwesomeIcon icon={faPlus} />
                 </button>
             </div>
@@ -52,14 +54,17 @@ const ProductsManagementPage = () => {
                     return (
                         <div key={product._id}>
                             <span>{`品牌：${product.brand}`}</span><br/>
-                            <span>{`产品：${product.name}`}</span><br/>
+                            <span>{`品名：${product.name}`}</span><br/>
                             <span>{`规格：${product.specification}`}</span><br/>
-                            <span>{`价格：${product.price}元`}</span><br/>
+                            <span>{`单价：${product.price}元`}</span><br/>
                             <span>{`产品描述：${product.description}`}</span>
                         </div>
                     )
                 })}
             </div>
+            {
+                isAddingProduct && <AddProductForm setIsAddingProduct={setIsAddingProduct} />
+            }
         </div>
         
     )

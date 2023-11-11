@@ -124,7 +124,7 @@ const AddUserModal = ({ setIsAddingUser, onUserAdded }) => {
                         />
                     </div>
                     {errorMessage && <h4 className='errorMessage'>{errorMessage}</h4>}
-                    <button type="submit">添加</button>
+                    <button type="submit">完成</button>
                 </form>
                 {isLoading && <Loading className='loadingIcon' />}
             </div>
